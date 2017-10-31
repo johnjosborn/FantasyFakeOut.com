@@ -7,17 +7,17 @@ require_once 'dbConnect.php';
 if (!$conn) {  die("Connection failed: " . mysqli_connect_error()); }
 
 
-    $w2 = "WHERE INJ_legit = '1'";
-    $w3 = "WHERE DUR_legit = '1'";
-    $w4 = "WHERE CAU_legit = '1'";
-    $w5 = "WHERE BYL_legit = '1'";
-    $w7 = "WHERE CTH_legit = '1'";
+    $w2 = "WHERE inj_legit = '1'";
+    $w3 = "WHERE dur_legit = '1'";
+    $w4 = "WHERE cau_legit = '1'";
+    $w5 = "WHERE byl_legit = '1'";
+    $w7 = "WHERE cth_legit = '1'";
         
 
 //C2: INJURY
 
-$sql = "SELECT INJ_id
-        FROM INJ
+$sql = "SELECT inj_id
+        FROM inj
         $w2";
 
 $result = mysqli_query($conn,$sql);
@@ -39,7 +39,7 @@ if($result){
         while($row = $result->fetch_assoc()){
 
             if ($i == $selectedRow){
-                $c2 = $row["INJ_id"];
+                $c2 = $row["inj_id"];
                 break;
             }
 
@@ -50,8 +50,8 @@ if($result){
 
 //C3: DURATION
 
-$sql = "SELECT DUR_id
-FROM DUR
+$sql = "SELECT dur_id
+FROM dur
 $w3";
 
 $result = mysqli_query($conn,$sql);
@@ -69,7 +69,7 @@ if($result){
         while($row = $result->fetch_assoc()){
 
             if ($i == $selectedRow){
-                $c3 = $row["DUR_id"];
+                $c3 = $row["dur_id"];
                 break;
             }
 
@@ -80,8 +80,8 @@ if($result){
 
 //C5: BY LINE
 
-$sql = "SELECT BYL_id
-FROM BYL
+$sql = "SELECT byl_id
+FROM byl
 $w5";
 
 $result = mysqli_query($conn,$sql);
@@ -99,7 +99,7 @@ if($result){
         while($row = $result->fetch_assoc()){
 
             if ($i == $selectedRow){
-                $c5 = $row["BYL_id"];
+                $c5 = $row["byl_id"];
                 break;
             }
 
@@ -110,8 +110,8 @@ if($result){
 
 //C7: TAG LINE
 
-$sql = "SELECT CTH_id
-FROM CTH
+$sql = "SELECT cth_id
+FROM cth
 $w7";
 
 $result = mysqli_query($conn,$sql);
@@ -129,7 +129,7 @@ if($result){
         while($row = $result->fetch_assoc()){
 
             if ($i == $selectedRow){
-                $c7 = $row["CTH_id"];
+                $c7 = $row["cth_id"];
                 break;
             }
 
@@ -139,9 +139,9 @@ if($result){
 }
 
 //C8 Quote
-$sql = "SELECT QTE_id
-FROM QTE
-WHERE QTE_id <> 0";
+$sql = "SELECT qte_id
+FROM qte
+WHERE qte_id <> 0";
 
 $result = mysqli_query($conn,$sql);
 
@@ -158,7 +158,7 @@ if($result){
                 while($row = $result->fetch_assoc()){
         
                     if ($i == $selectedRow){
-                        $c8 = $row["QTE_id"];
+                        $c8 = $row["qte_id"];
                         break;
                     }
         

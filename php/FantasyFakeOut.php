@@ -18,9 +18,9 @@ $byLineSelect = "base";
 
 // DUARATION SELECT
 
-$sql = "SELECT DUR_id, DUR_title
-        FROM DUR
-        WHERE DUR_legit = 1
+$sql = "SELECT dur_id, dur_title
+        FROM dur
+        WHERE dur_legit = 1
         ";
 
 $result = mysqli_query($conn,$sql);
@@ -34,8 +34,8 @@ if($result){
 
         while($row = $result->fetch_assoc()){
 
-            $id = $row['DUR_id'];
-            $title = $row['DUR_title'];
+            $id = $row['dur_id'];
+            $title = $row['dur_title'];
 
             $durationSelect .= "<option value='$id'>$title</option>";
 
@@ -47,9 +47,9 @@ if($result){
 
 // INJURY SELECT
 
-$sql = "SELECT INJ_id, INJ_title
-        FROM INJ
-        WHERE INJ_legit = 1
+$sql = "SELECT inj_id, inj_title
+        FROM inj
+        WHERE inj_legit = 1
         ";
 
 $result = mysqli_query($conn,$sql);
@@ -63,8 +63,8 @@ if($result){
 
         while($row = $result->fetch_assoc()){
 
-            $id = $row['INJ_id'];
-            $title = $row['INJ_title'];
+            $id = $row['inj_id'];
+            $title = $row['inj_title'];
 
             $injurySelect .= "<option value='$id'>$title</option>";
 
@@ -76,10 +76,10 @@ if($result){
 
 // PLAYER SELECT
 
-$sql = "SELECT PLY_id, PLY_name
-        FROM PLY
-        WHERE PLY_id <> 0
-        ORDER BY PLY_name
+$sql = "SELECT ply_id, ply_name
+        FROM ply
+        WHERE ply_id <> 0
+        ORDER BY ply_name
         ";
 
 $result = mysqli_query($conn,$sql);
@@ -93,8 +93,8 @@ if($result){
 
         while($row = $result->fetch_assoc()){
 
-            $id = $row['PLY_id'];
-            $title = $row['PLY_name'];
+            $id = $row['ply_id'];
+            $title = $row['ply_name'];
 
             $playerSelect .= "<option value='$id'>$title</option>";
 
@@ -106,10 +106,10 @@ if($result){
 
 // BYLINE SELECT
 
-$sql = "SELECT BYL_id, BYL_author, BYL_pos
-        FROM BYL
-        WHERE BYL_id <> 0
-        ORDER BY BYL_author
+$sql = "SELECT byl_id, byl_author, byl_pos
+        FROM byl
+        WHERE byl_id <> 0
+        ORDER BY byl_author
         ";
 
 $result = mysqli_query($conn,$sql);
@@ -123,9 +123,9 @@ if($result){
 
         while($row = $result->fetch_assoc()){
 
-            $id = $row['BYL_id'];
-            $title = $row['BYL_author'];
-            $pos = $row['BYL_pos'];
+            $id = $row['byl_id'];
+            $title = $row['byl_author'];
+            $pos = $row['byl_pos'];
 
             $byLineSelect .= "<option value='$id'>$title&nbsp|&nbsp$pos</option>";
 
@@ -137,9 +137,9 @@ if($result){
 
 // CATCH LINE SELECT
 
-$sql = "SELECT CTH_id, CTH_title
-        FROM CTH
-        WHERE CTH_id <> 0
+$sql = "SELECT cth_id, cth_title
+        FROM cth
+        WHERE cth_id <> 0
         ";
 
 $result = mysqli_query($conn,$sql);
@@ -153,8 +153,8 @@ if($result){
 
         while($row = $result->fetch_assoc()){
 
-            $id = $row['CTH_id'];
-            $title = $row['CTH_title'];
+            $id = $row['cth_id'];
+            $title = $row['cth_title'];
 
             $catchSelect .= "<option value='$id'>$title</option>";
 
@@ -166,9 +166,9 @@ if($result){
 
 // QUOTE SELECT
 
-$sql = "SELECT QTE_id, QTE_title
-FROM QTE
-WHERE QTE_id <> 0
+$sql = "SELECT qte_id, qte_title
+FROM qte
+WHERE qte_id <> 0
 ";
 
 $result = mysqli_query($conn,$sql);
@@ -182,8 +182,8 @@ if($result){
 
         while($row = $result->fetch_assoc()){
 
-            $id = $row['QTE_id'];
-            $title = $row['QTE_title'];
+            $id = $row['qte_id'];
+            $title = $row['qte_title'];
 
             $quoteSelect .= "<option value='$id'>$title</option>";
 
@@ -215,6 +215,24 @@ echo <<<_FixedHTML
     <link href="https://fonts.googleapis.com/css?family=Manuale" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="../css/ffo.css">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/icon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
+    <link rel="manifest" href="/icon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/icon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
     
     <script src="../js/jquery.js"></script>
@@ -264,7 +282,8 @@ echo <<<_FixedHTML
                             <input type='button' class='button button1' value='Add Phone' onclick='addText()'>
                         <hr>
                         <div class='selectTime'>
-                            Immediately
+                            <div class='timeSelect'>Send Immediately</div>
+                            <input type='button' class='button button3' value='Send!' onclick='sendOut()'>
                         </div>
                     </div>
                 </div>
@@ -279,9 +298,7 @@ echo <<<_FixedHTML
                 <div id='cont1'>
                     <div class='contentTitle'>Article Preview (What Your Friends Will See)</div>
                     <div id='iFrame'>
-                        <div id='iFrameCover'>
-                        </div>
-                        <iframe id="iFrameContent" src="https://www.w3schools.com">Please use an updated browser.</iframe>
+                        <iframe id="iFrameContent" src="">Please use an updated browser.</iframe>
                     </div>
                     <div>
                         <div class='inline linkLine'>Link:<input type='text' id='linkInput' value='pending' class='inline'>
@@ -378,7 +395,7 @@ echo <<<_FixedHTML
         var tagLine = $('#cth_select').val();
         var quote = $('#qte_select').val();
 
-        var articleLink = "realWebsite.php?c1=" + selPlayer + 
+        var articleLink = "http://www.sportsinsider.vegas/?c1=" + selPlayer + 
                             "&c2=" + injury + 
                             "&c3=" + duration +
                             "&c5=" + byLine +
@@ -387,13 +404,10 @@ echo <<<_FixedHTML
 
         $('#linkInput').val(articleLink);
 
-        $('#iFrameCover').show();
-
         var iframe = document.getElementById('iFrameContent');
 
-        iframe.src = "../php2/" + articleLink;
-
-        setTimeout(showContent, 100);        
+        iframe.src = articleLink;
+       
     }
 
     function copyLink(){
@@ -407,14 +421,10 @@ echo <<<_FixedHTML
           alert("Unable to auto copy.  Just select the text and copy.");
         }
     }
-    
-    function showContent(){
-        $('#iFrameCover').fadeOut(1000);
-    }
 
     function goToPage(){
         var link = $('#linkInput').val();
-        window.open('../php2/' + link);
+        window.open(link);
     }
 
     function randomize(){
@@ -496,7 +506,7 @@ echo <<<_FixedHTML
 
         if (validateEmail(thisEmail)){
 
-            var newEntry = "<div class='emailAdd'><input class='userInput' type='text' value='" + thisEmail + "' readonly><img class='remove' src='../media/remove.png'></div>";
+            var newEntry = "<div class='emailAdd'><input class='userInput emailSend' type='text' value='" + thisEmail + "' readonly><img class='remove' src='../media/remove.png'></div>";
 
             $('#emailList').append(newEntry);
             $('#emailInput').focus();
@@ -516,7 +526,7 @@ echo <<<_FixedHTML
 
         if (validatePhone(thisText)){
 
-            var newEntry = "<div class='textAdd'><input class='userInput' type='text' value='" + thisText + "' readonly><img class='remove' src='../media/remove.png'></div>";
+            var newEntry = "<div class='textAdd'><input class='userInput textSend' type='text' value='" + thisText + "' readonly><img class='remove' src='../media/remove.png'></div>";
 
             $('#textList').append(newEntry);
             $('#textInput').focus();
@@ -543,6 +553,52 @@ echo <<<_FixedHTML
     $(document).on('click', '.remove', function() {
         $(this).parent().remove();
     });
+
+    function sendOut(){
+
+        var selPlayer = $('#ply_select').val();
+        var injury = $('#inj_select').val();
+        var duration = $('#dur_select').val();
+        var byLine = $('#byl_select').val();
+        var tagLine = $('#cth_select').val();
+        var quote = $('#qte_select').val();
+
+        var articleLink = "http://www.sportsinsider.vegas/?c1=" + selPlayer + 
+                            "&c2=" + injury + 
+                            "&c3=" + duration +
+                            "&c5=" + byLine +
+                            "&c7=" + tagLine +
+                            "&c8=" + quote;
+
+        var emails = [];
+        var texts = [];
+
+        $(".emailSend").each(function() {
+            emails.push($(this).val());
+        });
+
+        $(".textSend").each(function() {
+            texts.push($(this).val());
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: 'fp/sendEmail.php',   
+            dataType: 'html',
+            data: {
+                emailList : emails,
+                textList : texts,
+                linkString : articleLink
+            },
+            success: function (html) {
+                alert(html);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                $("#contentUpdate").hide().fadeIn("slow").html("error loading content.");
+            }
+        });
+        
+    }
 
 
     </script>

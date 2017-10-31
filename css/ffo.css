@@ -231,16 +231,6 @@ body {
     height: 100%;
 }
 
-#iFrameCover{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    z-index: 3;
-}
-
 .linkLine{
     font-family: 'Manuale', serif;
     margin: .5em;
@@ -284,6 +274,12 @@ body {
 
 .emailAdd, .textAdd{
     margin: .25em;
+}
+
+.timeSelect{
+    color: blue;
+    font-size: 1.2em;
+    text-decoration: underline;
 }
 
 /* GENERAL STYLING */
@@ -363,4 +359,23 @@ body {
     background-image: -ms-linear-gradient(top, #3cff5c, #34db50);
     background-image: -o-linear-gradient(top, #3cff5c, #34db50);
     background-image: linear-gradient(to bottom, #3cff5c, #34db50);
+}
+
+.button3{
+    background: #6c1396;
+    background-image: -webkit-linear-gradient(top, #732e96, #6c1396);
+    background-image: -moz-linear-gradient(top, #732e96, #6c1396);
+    background-image: -ms-linear-gradient(top, #732e96, #6c1396);
+    background-image: -o-linear-gradient(top, #732e96, #6c1396);
+    background-image: linear-gradient(to bottom, #732e96, #6c1396);
+    color: #ffffff;
+}
+
+.button3:hover {
+    background: #732e96;
+    background-image: -webkit-linear-gradient(top, #774094, #732e96);
+    background-image: -moz-linear-gradient(top, #774094, #732e96);
+    background-image: -ms-linear-gradient(top, #774094, #732e96);
+    background-image: -o-linear-gradient(top, #774094, #732e96);
+    background-image: linear-gradient(to bottom, #774094, #732e96);
 }
