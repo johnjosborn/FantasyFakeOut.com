@@ -183,6 +183,16 @@ body {
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
+.userInput2{
+    font-size: 1.1em;
+    display: inline-block;
+    height: 100%;
+    width: 40%;
+    padding: .2em .5em;
+    background: #fff;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
 .remove{
     vertical-align: middle;
     margin-left: .5em;

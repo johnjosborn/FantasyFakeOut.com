@@ -279,7 +279,17 @@ echo <<<_FixedHTML
                             <br> 
                         <div class='selectLabel'>text</div>
                             <input type='phone' id='textInput' placeholder='enter phone: ###-###-####' class='userInput'>
+                            <br><br>
+                            <a target='_blank' href='https://freecarrierlookup.com/'>Look Up Carrier Here</a>
+                            <select id='textCarrier' class='userInput2'>
+                                <option value='0' disabled selected>Select Carrier (Required)</option>
+                                <option value='1'>Verizon</option>
+                                <option value='2'>AT&T</option>
+                                <option value='3'>Sprint</option>
+                            </select>
+                            <br>
                             <input type='button' class='button button1' value='Add Phone' onclick='addText()'>
+                            <div id='carrierWhy'>Why do I need the carrier?</div>
                         <hr>
                         <div class='selectTime'>
                             <div class='timeSelect'>Send Immediately</div>
@@ -562,7 +572,6 @@ echo <<<_FixedHTML
         var byLine = $('#byl_select').val();
         var tagLine = $('#cth_select').val();
         var quote = $('#qte_select').val();
-
         var articleLink = "http://www.sportsinsider.vegas/?c1=" + selPlayer + 
                             "&c2=" + injury + 
                             "&c3=" + duration +
@@ -588,6 +597,10 @@ echo <<<_FixedHTML
             data: {
                 emailList : emails,
                 textList : texts,
+                c1: selPlayer,
+                c2: injury, 
+                c3: duration,
+                c7: tagLine,
                 linkString : articleLink
             },
             success: function (html) {

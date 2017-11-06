@@ -1,6 +1,12 @@
 <?php
 
+
+//linked files
+require_once 'dbConnect.php';
 require_once "../../PHPMailer/class.phpmailer.php";
+
+// Check connection
+if (!$conn) {  die("Connection failed: " . mysqli_connect_error()); }
 
 $emailGoodCount = 0;
 $emailBadCount = 0;
@@ -8,11 +14,104 @@ $emailFail = "";
 $linkString = "";
 
 if (isset($_POST['linkString'])){
-
     $linkString = $_POST['linkString'];
-    $linkAnchor = "<a href='$linkString'>Breaking News</a>";
-
+    $linkAnchor = "<a href='$linkString'>View Full Story on SportsInsider.Vegas</a>";
 }
+
+$c1 = $c2 = $c3 = $c7 = 0;
+
+//pull all get variables
+if (isset($_POST['c1'])){
+    $c1 = $_POST['c1'];
+}
+if (isset($_POST['c2'])){
+    $c2 = $_POST['c2'];
+}
+if (isset($_POST['c3'])){
+    $c3 = $_POST['c3'];
+}
+if (isset($_POST['c7'])){
+    $c7 = $_POST['c7'];
+}
+
+//Player
+$sql = "SELECT ply_name
+FROM ply
+WHERE ply_id = '$c1'";
+
+$result = mysqli_query($conn,$sql);
+
+if($result){
+
+    if($result->num_rows != 0){
+
+        while($row = $result->fetch_assoc()){
+
+            $name = $row['ply_name'];
+
+        }   
+    }
+}      
+
+//INJURY
+$sql = "SELECT inj_text1, inj_text2, inj_text3, inj_text4, inj_photo
+FROM inj
+WHERE inj_id = '$c2'";
+
+$result = mysqli_query($conn,$sql);
+
+if($result){
+
+    if($result->num_rows != 0){
+
+        while($row = $result->fetch_assoc()){
+
+            $inj = $row["inj_text4"];  
+        }   
+    }
+}    
+
+//Duration
+$sql = "SELECT dur_text1
+FROM dur
+WHERE dur_id = '$c3'";
+
+$result = mysqli_query($conn,$sql);
+
+if($result){
+
+    if($result->num_rows != 0){
+
+        while($row = $result->fetch_assoc()){
+
+            $dur = $row["dur_text1"];
+        }   
+    }
+}  
+
+//Catch
+$sql = "SELECT cth_line
+FROM cth
+WHERE cth_id = '$c7'";
+
+$result = mysqli_query($conn,$sql);
+
+if($result){
+
+    if($result->num_rows != 0){
+
+        while($row = $result->fetch_assoc()){
+
+            $cth = $row["cth_line"];
+        }   
+    }
+}     
+
+$headline = "<h2>$cth</h2><br><h3>$name ( $inj ) $dur</h3>";
+
+$message = "<html><body><img src='cid:logo'><br>$headline<br><h3>$linkAnchor</h3></body></html>";
+
+$plainMessage = "$cth  $name ( $inj ) $dur $linkAnchor";
 
 if (isset($_POST['emailList'])){
 
@@ -37,8 +136,9 @@ if (isset($_POST['emailList'])){
     $mail->IsHTML(true);                                   
     
     $mail->Subject = "Injury Alert";
-    $mail->Body    = $linkAnchor;
-    $mail->AltBody = "This is the body in plain text for non-HTML mail clients";
+    $mail->Body    = $message;
+    $mail->AltBody = $plainMessage;
+    $mail->AddEmbeddedImage('../../media/vsiEmailLogo.png', 'logo', 'vsiEmailLogo.png');
 
     foreach ($emailArray as $value) {
         $mail->AddBCC($value);
