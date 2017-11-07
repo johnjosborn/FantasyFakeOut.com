@@ -196,11 +196,26 @@ if($result){
 // <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 // <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 $sportFilter = "<select id='sportFilter' class='sportSelect'>
-                    <option value='1' selected>NFL</option>
-                    <option value='2'>MLB</option>
-                    <option value='3'>NBA</option>
-                    <option value='4'>NHL</option>
-                </select>";
+    <option value='1' selected>NFL</option>
+    <option value='2'>MLB</option>
+    <option value='3'>NBA</option>
+    <option value='4'>NHL</option>
+</select>";
+
+$carrierSelect = "<select id='textCarrier' class='userInput2'>
+    <option value='0' disabled selected>Select Carrier (Required)</option>
+    <option value='@mms.alltelwireless.com'>Alltel</option>
+    <option value='@mms.att.net'>AT&T</option>
+    <option value='@myboostmobile.com'>Boost Mobile</option>
+    <option value='@mms.cricketwireless.net'>Cricket Wireless</option>
+    <option value='@msg.fi.google.com'>Project Fi</option>
+    <option value='@text.republicwireless.com'>Republic Wireless</option>
+    <option value='@pm.sprint.com'>Sprint</option>
+    <option value='@tmomail.net'>T-Mobile</option>
+    <option value='@mms.uscc.net'>U.S. Cellular</option>
+    <option value='@vzwpix.com'>Verizon</option>
+    <option value='@vmpix.com'>Virgin Mobile</option>
+</select>";
             
 echo <<<_FixedHTML
 
@@ -281,12 +296,7 @@ echo <<<_FixedHTML
                             <input type='phone' id='textInput' placeholder='enter phone: ###-###-####' class='userInput'>
                             <br><br>
                             <a target='_blank' href='https://freecarrierlookup.com/'>Look Up Carrier Here</a>
-                            <select id='textCarrier' class='userInput2'>
-                                <option value='0' disabled selected>Select Carrier (Required)</option>
-                                <option value='1'>Verizon</option>
-                                <option value='2'>AT&T</option>
-                                <option value='3'>Sprint</option>
-                            </select>
+                            $carrierSelect
                             <br>
                             <input type='button' class='button button1' value='Add Phone' onclick='addText()'>
                             <div id='carrierWhy'>Why do I need the carrier?</div>
@@ -343,7 +353,7 @@ echo <<<_FixedHTML
     </div>
     <input type='hidden' id='frm' value='1'>
     
-    <script>
+<script>
 
     window.onload = function() {
         updateLink();
@@ -533,16 +543,28 @@ echo <<<_FixedHTML
     function addText(){
         
         var thisText = $('#textInput').val();
+        var thisCarrier = $('#textCarrier').val();
 
+        
         if (validatePhone(thisText)){
+            
+            if (thisCarrier == '0' || !thisCarrier){
+                alert("Please select the cell phone carrier.")
+                $('#textCarrier').focus().css("background", "pink");
+    
+            } else {
 
-            var newEntry = "<div class='textAdd'><input class='userInput textSend' type='text' value='" + thisText + "' readonly><img class='remove' src='../media/remove.png'></div>";
+                var newEntry = "<div class='textAdd'><input class='userInput textSend' type='text' value='" + thisText + "' readonly><input class='textSendCarrier' type='hidden' value='" + thisCarrier + "' readonly><img class='remove' src='../media/remove.png'></div>";
+    
+                $('#textList').append(newEntry);
+                $('#textInput').focus();
+                $('#textInput').css("background", "#fff");
+                $('#textInput').val("");
+                $('#textCarrier').val("0");
+                $('#textCarrier').css("background", "#fff");
 
-            $('#textList').append(newEntry);
-            $('#textInput').focus();
-            $('#textInput').css("background", "#fff");
-            $('#textInput').val("");
-
+            }
+    
         } else {
             $('#textInput').focus();
             $('#textInput').css("background", "pink");
@@ -581,6 +603,7 @@ echo <<<_FixedHTML
 
         var emails = [];
         var texts = [];
+        var carriers = [];
 
         $(".emailSend").each(function() {
             emails.push($(this).val());
@@ -590,6 +613,10 @@ echo <<<_FixedHTML
             texts.push($(this).val());
         });
 
+        $(".textSendCarrier").each(function() {
+            carriers.push($(this).val());
+        });
+
         $.ajax({
             type: 'POST',
             url: 'fp/sendEmail.php',   
@@ -597,6 +624,7 @@ echo <<<_FixedHTML
             data: {
                 emailList : emails,
                 textList : texts,
+                carrierList : carriers,
                 c1: selPlayer,
                 c2: injury, 
                 c3: duration,
@@ -614,7 +642,7 @@ echo <<<_FixedHTML
     }
 
 
-    </script>
+</script>
 </body>
 </html>
 

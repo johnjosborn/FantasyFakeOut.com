@@ -113,12 +113,16 @@ $message = "<html><body><img src='cid:logo'><br>$headline<br><h3>$linkAnchor</h3
 
 $plainMessage = "$cth  $name ( $inj ) $dur $linkAnchor";
 
+$textSubject = "$cth  $name ( $inj ) $dur";
+
+$textMessage = "$linkString";
+
 if (isset($_POST['emailList'])){
 
     $emailArray = $_POST['emailList'];
 
     $mail = new PHPMailer();
-    $mail->SMTPDebug = 2;
+    $mail->SMTPDebug = 0;
     $mail->Timeout = 60;
     $mail->IsSMTP();   
     //$mail->Port = 465;                                   // set mailer to use SMTP
@@ -135,7 +139,7 @@ if (isset($_POST['emailList'])){
 
     $mail->IsHTML(true);                                   
     
-    $mail->Subject = "Injury Alert";
+    $mail->Subject = $cth;
     $mail->Body    = $message;
     $mail->AltBody = $plainMessage;
     $mail->AddEmbeddedImage('../../media/vsiEmailLogo.png', 'logo', 'vsiEmailLogo.png');
@@ -151,5 +155,51 @@ if (isset($_POST['emailList'])){
     } 
     echo "Mail Sent";
 }
+
+if (isset($_POST['textList'])){
+    
+        $textArray = $_POST['textList'];
+        $carrierArray = $_POST['carrierList'];
+    
+        $mail = new PHPMailer();
+        $mail->SMTPDebug = 2;
+        $mail->Timeout = 60;
+        $mail->IsSMTP();   
+        //$mail->Port = 465;                                   // set mailer to use SMTP
+        $mail->Host = "localhost";  // specify main and backup server
+        //$mail->Host = "secure211.inmotionhosting.com";
+        $mail->SMTPAuth = true;     // turn on SMTP authentication
+        $mail->Username = "newsdesk@sportsinsider.vegas";  // SMTP username
+        $mail->Password = "s477Y2CElFrZ"; // SMTP password
+        
+        $mail->From = "newsdesk@sportsinsider.vegas";
+        $mail->FromName = "Vegas Sports Insider";
+    
+        $mail->AddAddress("newsdesk@sportsinsider.vegas");
+    
+        $mail->IsHTML(true);                                   
+        
+        $mail->Subject = $textSubject;
+        $mail->Body    = $textMessage;
+        $mail->AltBody = $textMessage;
+
+        $arrlength = count($textArray);
+        
+        for($x = 0; $x < $arrlength; $x++) {
+            $phoneNum = $textArray[$x];
+            $gateWay = $carrierArray[$x];
+            
+            $fullTextAddress = $phoneNum . $gateWay;
+
+            $mail->AddBCC($fullTextAddress);
+        } 
+    
+        if(!$mail->Send())
+        {
+            echo $mail->ErrorInfo;
+            return false;
+        } 
+        echo "Text Sent";
+    }
 
 ?>
