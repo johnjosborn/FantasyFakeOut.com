@@ -30,7 +30,7 @@ if($result){
     if($result->num_rows != 0){
 
         $durationSelect = "<select id='dur_select' class='optionSelect'>
-                        <option selected disabled>Select Severity</option>";
+                        <option selected value='XX'>Select Severity</option>";
 
         while($row = $result->fetch_assoc()){
 
@@ -59,7 +59,7 @@ if($result){
     if($result->num_rows != 0){
 
         $injurySelect = "<select id='inj_select' class='optionSelect'>
-                            <option selected disabled>Select Injury</option>";
+                            <option selected value='XX'>Select Injury</option>";
 
         while($row = $result->fetch_assoc()){
 
@@ -78,7 +78,7 @@ if($result){
 
 $sql = "SELECT ply_id, ply_name
         FROM ply
-        WHERE ply_id <> 0
+        WHERE ply_id <> 'XX'
         ORDER BY ply_name
         ";
 
@@ -89,7 +89,7 @@ if($result){
     if($result->num_rows != 0){
 
     $playerSelect = "<select id='ply_select' class='optionSelectPlayer'>
-                        <option selected disabled>Select Player</option>";
+                        <option selected value='XX'>Select Player</option>";
 
         while($row = $result->fetch_assoc()){
 
@@ -108,7 +108,7 @@ if($result){
 
 $sql = "SELECT byl_id, byl_author, byl_pos
         FROM byl
-        WHERE byl_id <> 0
+        WHERE byl_id <> 'XX'
         ORDER BY byl_author
         ";
 
@@ -119,7 +119,7 @@ if($result){
     if($result->num_rows != 0){
 
         $byLineSelect = "<select id='byl_select' class='optionSelect'>
-                        <option selected disabled>Select By-Line</option>";
+                        <option selected value='XX'>Select By-Line</option>";
 
         while($row = $result->fetch_assoc()){
 
@@ -139,7 +139,7 @@ if($result){
 
 $sql = "SELECT cth_id, cth_title
         FROM cth
-        WHERE cth_id <> 0
+        WHERE cth_id <> 'XX'
         ";
 
 $result = mysqli_query($conn,$sql);
@@ -149,7 +149,7 @@ if($result){
     if($result->num_rows != 0){
 
         $catchSelect = "<select id='cth_select' class='optionSelect'>
-                        <option selected disabled>Select Tag Line</option>";
+                        <option selected value='XX'>Select Tag Line</option>";
 
         while($row = $result->fetch_assoc()){
 
@@ -168,7 +168,7 @@ if($result){
 
 $sql = "SELECT qte_id, qte_title
 FROM qte
-WHERE qte_id <> 0
+WHERE qte_id <> 'XX'
 ";
 
 $result = mysqli_query($conn,$sql);
@@ -178,7 +178,7 @@ if($result){
     if($result->num_rows != 0){
 
         $quoteSelect = "<select id='qte_select' class='optionSelect'>
-                        <option selected disabled>Select Quote</option>";
+                        <option selected value='XX'>Select Quote</option>";
 
         while($row = $result->fetch_assoc()){
 
@@ -361,7 +361,12 @@ echo <<<_FixedHTML
     
     $('body').on('change', '.optionSelect, .optionSelectPlayer', function() {
         updateLink();
-        $(this).css("background", "#9AEB9A");
+        selValue = $(this).val();
+        if (selValue == "00"){
+            $(this).css("background", "#FFE260");
+        } else {
+            $(this).css("background", "#9AEB9A");
+        }
     })
 
     $('body').on('click', '.sport', function() {
@@ -415,12 +420,7 @@ echo <<<_FixedHTML
         var tagLine = $('#cth_select').val();
         var quote = $('#qte_select').val();
 
-        var articleLink = "http://www.sportsinsider.vegas/?c1=" + selPlayer + 
-                            "&c2=" + injury + 
-                            "&c3=" + duration +
-                            "&c5=" + byLine +
-                            "&c7=" + tagLine +
-                            "&c8=" + quote
+        var articleLink = "http://www.sportsinsider.vegas/?articleID=" + selPlayer + injury + duration + byLine + tagLine + quote;
 
         $('#linkInput').val(articleLink);
 
@@ -594,12 +594,8 @@ echo <<<_FixedHTML
         var byLine = $('#byl_select').val();
         var tagLine = $('#cth_select').val();
         var quote = $('#qte_select').val();
-        var articleLink = "http://www.sportsinsider.vegas/?c1=" + selPlayer + 
-                            "&c2=" + injury + 
-                            "&c3=" + duration +
-                            "&c5=" + byLine +
-                            "&c7=" + tagLine +
-                            "&c8=" + quote;
+
+        var articleLink = "http://www.sportsinsider.vegas/?articleID=" + selPlayer + injury + duration + byLine + tagLine + quote;
 
         var emails = [];
         var texts = [];

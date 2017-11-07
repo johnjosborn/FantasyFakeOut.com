@@ -162,7 +162,7 @@ if (isset($_POST['textList'])){
         $carrierArray = $_POST['carrierList'];
     
         $mail = new PHPMailer();
-        $mail->SMTPDebug = 2;
+        $mail->SMTPDebug = 0;
         $mail->Timeout = 60;
         $mail->IsSMTP();   
         //$mail->Port = 465;                                   // set mailer to use SMTP
