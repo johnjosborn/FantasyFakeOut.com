@@ -317,14 +317,14 @@ echo <<<_FixedHTML
                 </div>
                 <div id='cont1'>
                     <div class='contentTitle'>Article Preview (What Your Friends Will See)</div>
-                    <div id='iFrame'>
-                        <iframe id="iFrameContent" src="">Please use an updated browser.</iframe>
-                    </div>
                     <div>
                         <div class='inline linkLine'>Link:<input type='text' id='linkInput' value='pending' class='inline'>
                         <input type='button' class='button button1' value='Copy Link' onclick='copyLink()'>
                         <input type='button' class='button button1' value='Go To Fake Page' onclick='goToPage()'>
                         </div>
+                    </div>
+                    <div id='iFrame'>
+                        <iframe id="iFrameContent" src="">Please use an updated browser.</iframe>
                     </div>
                 </div>
                 <div id='cont2' hidden>

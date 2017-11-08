@@ -232,8 +232,17 @@ body {
 }
 
 #iFrame{
-    height: 90%;
+    height: 105%;
+    width: 115%;
     position: relative;
+    zoom: 0.85;
+    -moz-transform: scale(0.85);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(0.85);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(0.85);
+    -webkit-transform-origin: 0 0;
+    margin: 0 auto;
 }
 
 #iFrameContent{
@@ -251,6 +260,8 @@ body {
     font-family: 'Manuale', serif;
     width: 55%;
     margin-left: 1em;
+    font-size: 1.1em;
+    padding-left: .5em;
 }
 
 /* CONTENT # */
