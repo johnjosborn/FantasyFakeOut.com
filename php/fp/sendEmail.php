@@ -12,6 +12,8 @@ $emailGoodCount = 0;
 $emailBadCount = 0;
 $emailFail = "";
 $linkString = "";
+$mailStatus = 0;
+$textStatus = 0;
 
 if (isset($_POST['linkString'])){
     $linkString = $_POST['linkString'];
@@ -150,10 +152,10 @@ if (isset($_POST['emailList'])){
 
     if(!$mail->Send())
     {
-        echo $mail->ErrorInfo;
-        return false;
-    } 
-    echo "Mail Sent";
+        $mailStatus = 2;
+    } else {
+        $mailStatus = 1;
+    }
 }
 
 if (isset($_POST['textList'])){
@@ -196,10 +198,13 @@ if (isset($_POST['textList'])){
     
         if(!$mail->Send())
         {
-            echo $mail->ErrorInfo;
-            return false;
-        } 
-        echo "Text Sent";
+            $textStatus = 2;
+        } else {
+            $textStatus = 1;
+        }
     }
+
+    echo $mailStatus;
+    echo $textStatus;
 
 ?>

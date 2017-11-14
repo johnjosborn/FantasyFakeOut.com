@@ -332,6 +332,9 @@ echo <<<_FixedHTML
                     <br>
                     <div>
                     <div class='destHolder'>
+                        <div class='destCount'>
+                            Ready to send to <span id='toCount'>0</span> of <span id='toAvail'>5</span> "Freinds".
+                        </div>
                         <div class='destTitle'>
                             Your Article Will Be Emailed To:
                         </div>
@@ -350,6 +353,13 @@ echo <<<_FixedHTML
                 </div>
             </div>
         </div>
+    </div>
+    <div id='coverAll' hidden>
+        Sending Email
+        <br>
+        this could take up to twenty seconds...
+        <br>
+        but hopefully it won't...
     </div>
     <input type='hidden' id='frm' value='1'>
     
@@ -420,8 +430,8 @@ echo <<<_FixedHTML
         var tagLine = $('#cth_select').val();
         var quote = $('#qte_select').val();
 
-        var articleLink = "http://www.sportsinsider.vegas/?articleID=" + selPlayer + injury + duration + byLine + tagLine + quote;
-
+        var articleLink = "http://www.sportsinsider.vegas/?articleID=q" + selPlayer + injury + duration + byLine + tagLine + quote;
+            
         $('#linkInput').val(articleLink);
 
         var iframe = document.getElementById('iFrameContent');
@@ -431,20 +441,42 @@ echo <<<_FixedHTML
     }
 
     function copyLink(){
-        var copyTextarea = document.querySelector('#linkInput');
-        copyTextarea.select();
-      
-        try {
-          var successful = document.execCommand('copy');
-          var msg = successful ? 'successful' : 'unsuccessful';
-        } catch (err) {
-          alert("Unable to auto copy.  Just select the text and copy.");
+
+        var link = $('#linkInput').val();
+        
+        if(link.includes("XX")){
+            
+            alert("Finish selecting options (Step 1 & Step 2) to build the link.");
+            articleNotComplete();
+        
+        } else {
+                
+            var copyTextarea = document.querySelector('#linkInput');
+            copyTextarea.select();
+        
+            try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            } catch (err) {
+            alert("Unable to auto copy.  Just select the text and copy.");
+            }
+
         }
     }
 
     function goToPage(){
+
         var link = $('#linkInput').val();
-        window.open(link);
+        
+        if(link.includes("XX")){
+            
+            alert("Finish selecting options (Step 1 & Step 2) to build the page.");
+            articleNotComplete();
+        
+        } else {
+
+            window.open(link);
+        }        
     }
 
     function randomize(){
@@ -526,12 +558,18 @@ echo <<<_FixedHTML
 
         if (validateEmail(thisEmail)){
 
+            if(countEmails()){
+            
             var newEntry = "<div class='emailAdd'><input class='userInput emailSend' type='text' value='" + thisEmail + "' readonly><img class='remove' src='../media/remove.png'></div>";
 
             $('#emailList').append(newEntry);
             $('#emailInput').focus();
             $('#emailInput').css("background", "#fff");
             $('#emailInput').val("");
+
+            updateCount();
+
+            }
 
         } else {
             $('#emailInput').focus();
@@ -554,6 +592,8 @@ echo <<<_FixedHTML
     
             } else {
 
+                if(countEmails()){
+                    
                 var newEntry = "<div class='textAdd'><input class='userInput textSend' type='text' value='" + thisText + "' readonly><input class='textSendCarrier' type='hidden' value='" + thisCarrier + "' readonly><img class='remove' src='../media/remove.png'></div>";
     
                 $('#textList').append(newEntry);
@@ -563,6 +603,11 @@ echo <<<_FixedHTML
                 $('#textCarrier').val("0");
                 $('#textCarrier').css("background", "#fff");
 
+                updateCount();
+
+                }
+
+
             }
     
         } else {
@@ -570,6 +615,23 @@ echo <<<_FixedHTML
             $('#textInput').css("background", "pink");
             alert("That phone number doesn't look quite right to us.  Are you even paying attention?")
         }
+    }
+
+    function countEmails(){
+
+        var count = $(".destList div").length;
+        
+        if(count < 5){
+            return true;
+        } else {
+            alert("Only 5 emails/messages can be sent at a time");
+            return false;
+        }
+    }
+
+    function updateCount(){
+        var count = $(".destList div").length;
+        $("#toCount").text(count);
     }
 
     function validateEmail(email) {
@@ -584,9 +646,28 @@ echo <<<_FixedHTML
 
     $(document).on('click', '.remove', function() {
         $(this).parent().remove();
+        updateCount();
     });
 
     function sendOut(){
+
+        var count = $(".destList div").length;
+        
+        if(count < 1){
+            alert("Add at least one email or text reciepeint (this can be you).");
+            return;
+        }
+
+        var link = $('#linkInput').val();
+        
+        if(link.includes("XX")){
+            
+            alert("Finish selecting options (Step 1 & Step 2) to build the article.");
+            articleNotComplete();
+            return;        
+        }
+
+        $("#coverAll").html("Sending Email(s) / Text(s) <br> this could take up to twenty seconds... <br> but hopefully it won't...").css("background-color", "#000000da").fadeIn();
 
         var selPlayer = $('#ply_select').val();
         var injury = $('#inj_select').val();
@@ -595,7 +676,7 @@ echo <<<_FixedHTML
         var tagLine = $('#cth_select').val();
         var quote = $('#qte_select').val();
 
-        var articleLink = "http://www.sportsinsider.vegas/?articleID=" + selPlayer + injury + duration + byLine + tagLine + quote;
+        var articleLink = "http://www.sportsinsider.vegas/?articleID=q" + selPlayer + injury + duration + byLine + tagLine + quote;
 
         var emails = [];
         var texts = [];
@@ -628,13 +709,83 @@ echo <<<_FixedHTML
                 linkString : articleLink
             },
             success: function (html) {
-                alert(html);
+
+                switch(html) {
+                    case "00":
+                        $("#coverAll").html("Oh no, we don't think we sent anything... <br> Check your 'To' list and try again maybe?").css("background-color", "#421313").delay(2000).fadeOut();
+                        break;
+                    case "01":
+                        $("#coverAll").html("Send Sucess!").css("background-color", "#134213").delay(1000).fadeOut();
+                        $("#textList").empty();
+                        break;
+                    case "02":
+                        $("#coverAll").html("Failed to send Text Message(s)...<br> Check your 'To' list and try again maybe?").css("background-color", "#421313").delay(2000).fadeOut();
+                        break;
+                    case "10":
+                        $("#coverAll").html("Send Sucess!").css("background-color", "#134213").delay(1000).fadeOut();
+                        $("#emailList").empty();
+                        break;
+                    case "11":
+                        $("#coverAll").html("Send Sucess!").css("background-color", "#134213").delay(1000).fadeOut();
+                        $("#emailList").empty();
+                        $("#textList").empty();
+                        break;
+                    case "12":
+                        $("#coverAll").html("We sent the Emails ok, <br> but had problems with the Text Messages... <br> Check your 'To' list and try again maybe?").css("background-color", "#421313").delay(2000).fadeOut();
+                        $("#emailList").empty();
+                        break;
+                    case "20":
+                        $("#coverAll").html("We had a problem sending the emails. <br> Check your 'To' list and try again maybe?").css("background-color", "#421313").delay(2000).fadeOut();
+                        break;
+                    case "21":
+                        $("#coverAll").html("We sent the Texts ok, <br> but had problems with the Emails... <br> Check your 'To' list and try again maybe?").css("background-color", "#421313").delay(2000).fadeOut();
+                        $("#textList").empty();
+                        break;
+                    case "22":
+                        $("#coverAll").html("We had problems with both the Emails <br> and Text Messages... <br>Check your 'To' list and try again maybe?").css("background-color", "#421313").delay(2000).fadeOut();
+                        break;
+                    default:
+                        $("#coverAll").html("Oh no, something went wrong...<br>Check your 'To' list and try again maybe?").css("background-color", "#421313").delay(2000).fadeOut();
+                        break
+                }
+
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 $("#contentUpdate").hide().fadeIn("slow").html("error loading content.");
             }
-        });
+        });   
+    }
+
+    function articleNotComplete(){
         
+        var selPlayer = $('#ply_select').val();
+
+        if (selPlayer == "XX"){
+            $("#step1Content").slideDown(); 
+            $("#step2Content").slideUp();  
+            $("#step3Content").slideUp(); 
+            $("#cont1").slideDown(); 
+            $("#cont2").slideUp(); 
+            $("#showArt").hide();
+            $("#showDet").show();
+            $("#step2, #step3").css("background", "linear-gradient( rgb(26, 93, 226), rgb(56, 110, 219)"); 
+            $("#step2, #step3").css("color", "#000");  
+            $("#step1").css("background", "linear-gradient( #ce531e, #c93f04)");  
+            $("#step1").css("color", "#fff"); 
+        } else {
+            $("#step2Content").slideDown(); 
+            $("#step1Content").slideUp();   
+            $("#step3Content").slideUp();
+            $("#cont1").slideDown(); 
+            $("#cont2").slideUp(); 
+            $("#showArt").hide();
+            $("#showDet").show();
+            $("#step1, #step3").css("background", "linear-gradient( rgb(26, 93, 226), rgb(56, 110, 219)"); 
+            $("#step1, #step3").css("color", "#000");  
+            $("#step2").css("background", "linear-gradient( #ce531e, #c93f04)");  
+            $("#step2").css("color", "#fff"); 
+        }
+
     }
 
 
