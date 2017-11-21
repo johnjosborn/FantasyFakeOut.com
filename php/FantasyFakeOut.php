@@ -330,26 +330,64 @@ echo <<<_FixedHTML
                 <div id='cont2' hidden>
                     <div class='contentTitle'>The Details (Who Get's It and When)</div>
                     <br>
-                    <div>
-                    <div class='destHolder'>
-                        <div class='destCount'>
-                            Ready to send to <span id='toCount'>0</span> of <span id='toAvail'>5</span> "Freinds".
+                    <div id='cont2body'>
+                        <div class='destHolder'>
+                            <div class='destCount'>
+                                Ready to send to <span id='toCount'>0</span> of <span id='toAvail'>5</span> "Freinds".
+                            </div>
+                            <div class='destTitle'>
+                                Your Article Will Be Emailed To:
+                            </div>
+                            <div class='destList' id='emailList'>
+                            </div>
+                            <div class='destTitle'>
+                                Your Article Will Be Texted To:
+                            </div>
+                            <div class='destList' id='textList'>
+                            </div>
                         </div>
-                        <div class='destTitle'>
-                            Your Article Will Be Emailed To:
-                        </div>
-                        <div class='destList' id='emailList'>
-                        </div>
-                        <div class='destTitle'>
-                            Your Article Will Be Texted To:
-                        </div>
-                        <div class='destList' id='textList'>
+                        <div class='destRight'>
+                            To email or text?  That is the question...<br><br>
+                            email<br>
+                            Pros:
+                            <ul>
+                                <li>Full fake injury details are in the email</li>
+                            </ul>
+                            Cons:
+                            <ul>
+                                <li>Might get stuffed in junk mail</li>
+                                <li>Might not get read in time</li>
+                            </ul>
+                            <br><br>
+                            Text
+                            <br>
+                            Pros:
+                            <ul>
+                                <li>They should see it as soon as it arrives</li>
+                            </ul>
+                            Cons:
+                            <ul>
+                                <li>Might get stuffed in junk mail</li>
+                                <li>Might not get read in time</li>
+                            </ul>
+                            <br><br>
+                            Send Direct or Forward?  That is another question...<br>
+                            <br>
+                            Send Direct to Your Friend
+                            <br>
+                            Pros:
+                            <ul>
+                                <li>Plausible Deniability</li>
+                                <li>If you have suspocious friends, they might not believe something from you</li>
+                            </ul>
+                            Cons:
+                            <ul>
+                                <li>They might not belive a source they've never heard of</li>
+                                <li>If it works, they will know you had something to do with it</li>
+                            </ul>
+                            
                         </div>
                     </div>
-                    <div class='destRight'>
-                        Notes and instructions
-                    </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -360,6 +398,8 @@ echo <<<_FixedHTML
         this could take up to twenty seconds...
         <br>
         but hopefully it won't...
+        <br>
+        but if it does, here's a picture to look at
     </div>
     <input type='hidden' id='frm' value='1'>
     
@@ -430,7 +470,7 @@ echo <<<_FixedHTML
         var tagLine = $('#cth_select').val();
         var quote = $('#qte_select').val();
 
-        var articleLink = "http://www.sportsinsider.vegas/?articleID=q" + selPlayer + injury + duration + byLine + tagLine + quote;
+        var articleLink = "http://www.sportsinsider.vegas/?articleID=" + injury + duration + byLine + tagLine + quote + selPlayer ;
             
         $('#linkInput').val(articleLink);
 
@@ -676,7 +716,7 @@ echo <<<_FixedHTML
         var tagLine = $('#cth_select').val();
         var quote = $('#qte_select').val();
 
-        var articleLink = "http://www.sportsinsider.vegas/?articleID=q" + selPlayer + injury + duration + byLine + tagLine + quote;
+        var articleLink = "http://www.sportsinsider.vegas/?articleID=" + injury + duration + byLine + tagLine + quote + selPlayer ;
 
         var emails = [];
         var texts = [];
@@ -748,6 +788,8 @@ echo <<<_FixedHTML
                         $("#coverAll").html("Oh no, something went wrong...<br>Check your 'To' list and try again maybe?").css("background-color", "#421313").delay(2000).fadeOut();
                         break
                 }
+
+                updateCount();
 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 

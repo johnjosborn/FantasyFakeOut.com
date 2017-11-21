@@ -227,6 +227,13 @@ body {
 
 #cont1, #cont2{
     height: 100%;
+    width: 100%;
+}
+
+#cont2body{
+    overflow: hidden;
+    height: 90%;
+    width: 100%;
 }
 
 #contentContainer{
@@ -309,7 +316,9 @@ body {
 
 .destRight{
     width: 45%;
+    height: 100%;
     float: right;
+    overflow-y: auto;
 }
 
 .destCount{
