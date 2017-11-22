@@ -10,7 +10,7 @@ echo <<<_FixedHTML
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="css/ffo.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
 
@@ -40,8 +40,32 @@ echo <<<_FixedHTML
     </script>
 </head>
 <body>
-    <div class='content'>
+    <div id='content'>
+        <div class='full div1'><img src='media/logo8.png' class='img1'></div>
+        <div class='full div1B'><img src='media/logo8.png' class='img1'></div>
+        <div class='divcenter div2'>
+            <img src='media/indexBanner1.png' class='bannerImg'>
+            <img src='media/indexBanner2.png' class='bannerImg'> 
+        </div>
+        <div class='divcenter div3'>
+                <img src='media/emailimg.png' class='emailImg'>
+                <img src='media/articleimage2.png' class='articleImg'>
+                <img src='media/textmsg.png' class='textImg'>
+                <br>
+                <div class='helperText'>
+                All texts and emails are sent from out official Vegas Sports Insider accounts.
+                Your name, email, phone numbers and fingerprints will be nowhere to be found. 
+                Unless you send the messages yourself.  See out <a href=''>Strategy Guide</a> to see when you might want to send it your self.
+                </div>
+        </div>
+        <div class='divcenter div4'>
+            <img src='media/indexBanner4.png' class='bannerImg'>
+            <br><br>
+            <img src='media/indexBanner3.png' class='bannerImg'>
+        </div>
+        <div class='full'>go make your article</div>
         <a href='php/FantasyFakeOut.php'>Main Page</php>
+        
     </div>
 
     <script>
