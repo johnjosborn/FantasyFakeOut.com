@@ -43,20 +43,24 @@ echo <<<_FixedHTML
     <div id='content'>
         <div class='full div1'><img src='media/logo8.png' class='img1'></div>
         <div class='full div1B'><img src='media/logo8.png' class='img1'></div>
+        <div class='divcenter div5'>
+            <img src='media/quote1.png' class='bannerImg'>
+            <img src='media/quote2.png' class='bannerImg'>
+        </div>
         <div class='divcenter div2'>
             <img src='media/indexBanner1.png' class='bannerImg'>
             <img src='media/indexBanner2.png' class='bannerImg'> 
         </div>
         <div class='divcenter div3'>
-                <img src='media/emailimg.png' class='emailImg'>
-                <img src='media/articleimage2.png' class='articleImg'>
-                <img src='media/textmsg.png' class='textImg'>
-                <br>
-                <div class='helperText'>
+            <img src='media/emailimg.png' class='emailImg'>
+            <img src='media/articleimage2.png' class='articleImg'>
+            <img src='media/textmsg.png' class='textImg'>
+            <br>
+            <div class='helperText'>
                 All texts and emails are sent from out official Vegas Sports Insider accounts.
                 Your name, email, phone numbers and fingerprints will be nowhere to be found. 
-                Unless you send the messages yourself.  See out <a href=''>Strategy Guide</a> to see when you might want to send it your self.
-                </div>
+                Unless you send the messages yourself.  See our <a href=''>Strategy Guide</a> to see when you might want to send it your self.
+            </div>
         </div>
         <div class='divcenter div4'>
             <img src='media/indexBanner4.png' class='bannerImg'>
