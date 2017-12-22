@@ -8,7 +8,14 @@ html, body{
 }
 
 body{
-    background: #666;
+    background: linear-gradient( #353535, #6b6b6b);
+}
+
+#content{
+    background-image: url("../media/bk5.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-attachment: fixed;
 }
 
 .full{
@@ -22,12 +29,23 @@ body{
     top: 0;
     background: #000;
     text-align: center;
-    border-bottom: 4px solid white;
+    border-bottom: 1px solid white;
     z-index: 1;
 }
 
+.tryit{
+    position: absolute;
+    top: 20%;
+    right: 2%;
+}
+
+.sample{
+    position: absolute;
+    top: 20%;
+    left: 2%;
+}
+
 .div2{
-    padding: 1.5em 0 1.5em 0;
     margin: 0 auto;
     background: none;
     position: relative;
@@ -39,31 +57,51 @@ body{
     border-bottom: 4px solid white;
     background: linear-gradient( #1c2d52, #37579b);
     width: 100%;
+    position: relative;
 }
+
 
 .div4{
-    padding: 1.5em 0 1em 0;
+    padding: 0;
     margin: 0 auto;
     background: none;
+    text-align: center;
 }
 
-.div5{
-    padding: 1em 1em;
-    margin: 0 auto;
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 1.5em;
-    color: #fff;
-    border-bottom: 4px solid white;
-    background: linear-gradient( rgb(141, 0, 0), rgb(77, 0, 0));
-    width: 100%;
-}
-
-.divleft{
+.div6{
     text-align: left;
+    padding: 0 0 0 1em;
+    border-bottom: 4px solid white;
+    /* background: linear-gradient( #1c2d52, #37579b); */
+    width: 100%;
+    position: relative;
 }
 
-.divwhite{
-    background-color: #fff;
+#detailTable{
+    width: 100%;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #fff;
+    margin: 0 auto;
+    padding: 1em 0 3em 0;
+}
+
+
+#detailTable th{
+    width: 25%;
+    font-size: 1.75em;
+    color: #ffffff;
+}
+
+#detailTable td{
+    width: 33%;
+    font-size: 1.5em;
+    text-align: left;
+    padding: .5em 0 .5em 1em;
+    border-bottom: 1px solid #6e6e6e;
+}
+
+#detailTable tr{
+    border-bottom: 2px solid white;
 }
 
 .divcenter{
@@ -79,8 +117,29 @@ body{
     color: white;
 }
 
+.helperText2{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.75em;
+    text-align: left;
+    margin: 0 0 0 3em;
+    color: white;
+    padding: 0;
+    width: 60%;
+}
+
+.helperText3{
+    width: 50%;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.75em;
+    text-align: left;
+    margin: 0 0 0 5em;
+    color: white;
+    padding: 1em;
+}
+
 .bannerImg{
     margin: 0 1em;
+    max-height:100px;
 }
 
 .articleImg{
@@ -101,6 +160,17 @@ body{
     margin: -1em 1em 0 1em;
 }
 
+.tryImg{
+    max-height:100px;
+    z-index: 1;
+}
+
+.quoteImg{
+    max-height:70px;
+    z-index: 1;
+    margin: 0 3em;
+}
+
 #article{
     position: absolute;
     top: 0;
@@ -111,4 +181,9 @@ body{
     position: absolute;
     top: 0;
     right: 10%;
+}
+
+a{
+    color: #fff;
+    font-size: 1.1em;
 }
